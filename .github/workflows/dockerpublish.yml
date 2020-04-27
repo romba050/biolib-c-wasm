@@ -1,0 +1,55 @@
+name: Build and Publish Docker
+
+on: push
+
+env:
+  DOCKER_REPOSITORY_NAME: biolib-c-wasm
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Set docker_tag
+        run: >-
+          if [ ${GITHUB_REF#refs/heads/} = 'master' ]; then
+          echo "::set-env name=docker_tag::latest" ;
+          else
+          echo "::set-env name=docker_tag::$GITHUB_SHA" ;
+          fi
+
+      - name: Set ECR_REGISTRY
+        run: echo "::set-env name=ECR_REGISTRY::$ECR_REGISTRY"
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+
+      - name: Build docker image
+        run: docker build -t $ECR_REGISTRY/$DOCKER_REPOSITORY_NAME:$docker_tag .
+
+      - name: Push docker image to AWS
+        run: docker push $ECR_REGISTRY/$DOCKER_REPOSITORY_NAME:$docker_tag
+
+      - name: Push docker image to Docker Hub if on master branch
+        run: >-
+            if [ ${GITHUB_REF#refs/heads/} = 'master' ]; then 
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin &&
+            docker tag $ECR_REGISTRY/$DOCKER_REPOSITORY_NAME:$docker_tag biolib/c-wasm:latest &&
+            docker push biolib/c-wasm:latest ;
+            fi
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
+
