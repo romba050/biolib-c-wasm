@@ -17,6 +17,7 @@ The command takes in 3 volume mappings:
 ## The build.sh script
 
 The images ships with a default build script. For simple projects, this should be sufficient. It looks like the following (see build.sh in the repository for the update-to-date version. 
+Remember to change the binary name from your_binary_file_name.
 
 ```
 make clean
