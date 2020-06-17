@@ -1,7 +1,7 @@
 make clean
 emmake make
 export BINNAME=your_binary_file_name
-mv ./bin/$BINNAME $BINNAME.bc
+mv $BINNAME $BINNAME.bc
 BIOLIB_REQ_FLAGS="\
     -s WASM=1 \
     -s WASM_MEM_MAX=512MB \
