@@ -43,7 +43,7 @@ emcc \
 ```
 
 ## If you don't have a make file
-Emscripten (https://emscripten.org/index.html) can be used to compile C/C++ to wasm. It looks something like this (see makefile in the repository).
+Emscripten (https://emscripten.org/index.html) can be used to compile C/C++ to wasm. It looks something like this (see makefile in the repository):
 ```
 # build an executable named your_file_name from your_file_name.c
 all: your_file_name.c 
