@@ -42,7 +42,7 @@ emcc \
     -o $BINNAME.mjs $BINNAME.bc
 ```
 
-## If you don't have a make file
+## If you don't have a Makefile
 Emscripten (https://emscripten.org/index.html) can be used to compile C/C++ to wasm. It looks something like this (see makefile in the repository):
 ```
 # build an executable named your_file_name from your_file_name.c
