@@ -1,6 +1,6 @@
 make clean
 emmake make
-export BINNAME=your_file_name
+export BINNAME=wgsim
 mv $BINNAME $BINNAME.bc
 BIOLIB_REQ_FLAGS="\
     -s WASM=1 \
@@ -12,9 +12,11 @@ BIOLIB_REQ_FLAGS="\
     -s FORCE_FILESYSTEM=1 \
     -lidbfs.js \
     -lnodefs.js \
-    -s EXIT_RUNTIME=1"
+    -s EXIT_RUNTIME=1 \
+	-s ALLOW_MEMORY_GROWTH=1"
 APP_ADDITIONAL_FLAGS="-s ERROR_ON_UNDEFINED_SYMBOLS=0"
 emcc \
     $BIOLIB_REQ_FLAGS \
     $APP_ADDITIONAL_FLAGS \
     -o $BINNAME.mjs $BINNAME.bc
+

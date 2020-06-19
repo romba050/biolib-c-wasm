@@ -16,41 +16,10 @@ The command takes in 3 volume mappings:
 
 ## The build.sh script
 
-The images ships with a default build script. For simple projects, this should be sufficient. It looks like the following (see build.sh in the repository for the update-to-date version. 
-Remember to change the binary file name "your_file_name" in line 3.
+The images ships with a default build script. For simple projects, this should be sufficient. Remember to change the binary file name "your_file_name" in line 3 of build.sh.
+Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to wasm.
 
-```
-make clean
-emmake make
-export BINNAME=your_file_name
-mv $BINNAME $BINNAME.bc
-BIOLIB_REQ_FLAGS="\
-    -s WASM=1 \
-    -s WASM_MEM_MAX=512MB \
-    -s TOTAL_MEMORY=512MB \
-    -s -g2 \
-    -s EMIT_EMSCRIPTEN_METADATA=1 \
-    -s LEGALIZE_JS_FFI=1 \
-    -s FORCE_FILESYSTEM=1 \
-    -lidbfs.js \
-    -lnodefs.js \
-    -s EXIT_RUNTIME=1"
-APP_ADDITIONAL_FLAGS="-s ERROR_ON_UNDEFINED_SYMBOLS=0"
-emcc \
-    $BIOLIB_REQ_FLAGS \
-    $APP_ADDITIONAL_FLAGS \
-    -o $BINNAME.mjs $BINNAME.bc
-```
+## If you don't have a Makefile
+build.sh expects a Makefile in the directory to run. In case you do not have a Makefile, use the one provided in this repository. Again, replace "your_file_name" with the name of the script you want to compile.
 
-## If you don't have a make file
-Emscripten (https://emscripten.org/index.html) can be used to compile C/C++ to wasm. It looks something like this (see makefile in the repository).
-```
-# build an executable named your_file_name from your_file_name.c
-all: your_file_name.c 
-    emcc -g -O2 -Wall -o your_file_name your_file_name.c -lz -lm
-
-# rule to remove old executables
-clean: 
-    rm -f your_file_name
-
-```
+The compiled wasm file that is created in ./output can be uploaded to biolib when creating a new app.
