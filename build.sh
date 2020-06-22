@@ -1,6 +1,6 @@
 make clean
 emmake make
-export BINNAME=wgsim
+export BINNAME=your_file_name
 mv $BINNAME $BINNAME.bc
 BIOLIB_REQ_FLAGS="\
     -s WASM=1 \
@@ -19,4 +19,3 @@ emcc \
     $BIOLIB_REQ_FLAGS \
     $APP_ADDITIONAL_FLAGS \
     -o $BINNAME.mjs $BINNAME.bc
-
