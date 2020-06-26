@@ -1,7 +1,7 @@
 # biolib-c-wasm
 This repository contains a Dockerfile and a build script to assist with the compilation of C and C++ to Wasm.
 
-## Docker
+## Getting started with Docker
 Download `build.sh` and place it in the folder of the project you wish to compile.
 
 You can fetch and run the docker image directly from Docker Hub by running the following command:
