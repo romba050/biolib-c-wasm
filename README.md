@@ -24,3 +24,5 @@ Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to
 
 The compiled wasm file that is created in ./output can now be uploaded to biolib when creating a new app.
 See https://github.com/romba050/biolib-c-wasm/tree/update_readme on how to create a biolib app.
+
+Make sure FileType WebAssembly and compiler C/C++ are selected.
