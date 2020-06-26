@@ -3,3 +3,13 @@
 
 # Mac files
 .DS_Store
+
+# have gitignore ignore itsewlf so that you can add files in this repo which you basically ignore without sharing them with the world
+.gitignore
+Makefile_template
+build_template.sh
+configure
+kseq.h
+output_wgsim/
+test.txt
+wgsim.c

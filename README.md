@@ -23,3 +23,4 @@ Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to
 `build.sh` expects a Makefile in the directory to run. In case you do not have a `Makefile`, use the one provided in this repository. Again, replace "your_file_name" with the name of the script you want to compile.
 
 The compiled wasm file that is created in ./output can now be uploaded to biolib when creating a new app.
+See https://github.com/romba050/biolib-c-wasm/tree/update_readme on how to create a biolib app.
