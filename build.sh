@@ -1,4 +1,4 @@
-make clean
+emmake make clean
 emmake make
 export BINNAME=your_file_name
 mv $BINNAME $BINNAME.bc
