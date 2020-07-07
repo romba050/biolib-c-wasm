@@ -13,7 +13,6 @@ BIOLIB_REQ_FLAGS="\
     -lidbfs.js \
     -lnodefs.js \
     -s EXIT_RUNTIME=1"
-#	-s ALLOW_MEMORY_GROWTH=1"
 APP_ADDITIONAL_FLAGS="-s ERROR_ON_UNDEFINED_SYMBOLS=0"
 emcc \
     $BIOLIB_REQ_FLAGS \
