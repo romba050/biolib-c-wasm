@@ -2,9 +2,11 @@
 This repository contains a Dockerfile and a build script to assist with the compilation of C and C++ to Wasm.
 
 ## Getting started with Docker
-Download `build.sh` and place it in the folder of the project you wish to compile.
+After copying  this repository, place `build.sh` in the folder of the project you wish to compile. See section "The build.sh script".
 
-You can fetch and run the docker image directly from Docker Hub by running the following command:
+To install docker, see https://docs.docker.com/get-docker/.
+
+From that same folder, you can fetch and run the docker image directly from Docker Hub by running the following command:
 ```
 docker run -v $PWD/build.sh:/build.sh -v $PWD:/input -v $PWD/output:/output biolib/c-wasm
 ```
@@ -22,7 +24,11 @@ Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to
 ## If you don't have a Makefile
 `build.sh` expects a Makefile in the directory to run. In case you do not have a `Makefile`, use the one provided in this repository. Again, replace "your_file_name" with the name of the script you want to compile.
 
+## If you do have a Makefile
+In the Makefile, replace all instances of the C/C++ compiler (e.g. g++) with emcc (on Linux/MacOS, works for both C and C++, use em++ to force compilation as C++).
+
+## Creating the Biolib App
 The compiled wasm file that is created in ./output can now be uploaded to biolib when creating a new app.
 See https://github.com/romba050/biolib-c-wasm/tree/update_readme on how to create a biolib app.
 
-Make sure FileType WebAssembly and compiler C/C++ are selected.
+When creating the Biolib app, make sure to select FileType -> WebAssembly and compiler -> C/C++.
