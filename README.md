@@ -21,14 +21,48 @@ The command takes in 3 volume mappings:
 The image ships with a default build script. For simple projects, this should be sufficient. Remember to change the binary file name "your_file_name" in line 3 of build.sh.
 Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to wasm.
 
-## If you don't have a Makefile
-`build.sh` expects a Makefile in the directory to run. In case you do not have a `Makefile`, use the one provided in this repository. Again, replace "your_file_name" with the name of the script you want to compile.
-
-## If you do have a Makefile
-In the Makefile, replace all instances of the C/C++ compiler (e.g. g++) with emcc (on Linux/MacOS, works for both C and C++, use em++ to force compilation as C++).
-
 ## Creating the Biolib App
 The compiled wasm file that is created in ./output can now be uploaded to biolib when creating a new app.
 See https://github.com/romba050/biolib-c-wasm/tree/update_readme on how to create a biolib app.
 
 When creating the Biolib app, make sure to select FileType -> WebAssembly and compiler -> C/C++.
+
+## Common issues
+
+### If your project doesn't have a Makefile
+`build.sh` expects a Makefile in the directory to run. In case you do not have a `Makefile`, use the one provided in this repository. Again, replace "your_file_name" with the name of the script you want to compile.
+
+### If your project does have a Makefile
+In the Makefile, replace all instances of the C/C++ compiler (e.g. g++) with emcc (on Linux/MacOS, works for both C and C++, use em++ to force compilation as C++).
+
+### If your project uses configure to build it's Makefile:
+Add this code to your build.sh:
+'''
+emmake make clean
+emconfigure ./configure --without-x
+emmake make
+'''
+
+### If your wasm file complains about missing functions when executed:
+This might be caused by library archives (.a files) that have not been linked. Search for .a files in your project:
+'''
+find . -name "*.a"
+'''
+Then link the archives you find by adjsuting your build.sh like so:
+'''
+library_arr="\
+    path/to/archive/file1.a \
+    path/to/archive/file2.a"
+
+for BINNAME in ${array[@]}; do
+    mv emboss/.libs/$BINNAME $BINNAME.bc
+
+    emcc \
+        $BIOLIB_REQ_FLAGS \
+        $APP_ADDITIONAL_FLAGS \
+        -o $BINNAME.mjs $BINNAME.bc $library_arr
+done
+
+'''
+
+
