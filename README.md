@@ -23,7 +23,7 @@ Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to
 
 ## Creating the Biolib App
 The compiled wasm file that is created in ./output can now be uploaded to biolib when creating a new app.
-See https://github.com/romba050/biolib-c-wasm/tree/update_readme on how to create a biolib app.
+See https://biolib.com/docs/first-app-video/ on how to create a biolib app.
 
 When creating the Biolib app, make sure to select FileType -> WebAssembly and compiler -> C/C++.
 
@@ -39,7 +39,7 @@ In the Makefile, replace all instances of the C/C++ compiler (e.g. g++) with emc
 Add this code to your build.sh:
 '''
 emmake make clean
-emconfigure ./configure --without-x
+emconfigure ./configure
 emmake make
 '''
 
