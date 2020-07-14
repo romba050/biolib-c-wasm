@@ -19,7 +19,7 @@ The command takes in 3 volume mappings:
 ## The build.sh script
 
 The image ships with a default build script. For simple projects, this should be sufficient. Remember to change the binary file name "your_file_name" on line 3 of build.sh.
-Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to wasm.
+Build.sh uses Emscripten (https://emscripten.org/index.html) to compile C/C++ to wasm.
 
 ## Creating the Biolib App
 The compiled wasm file that is created in ./output can now be uploaded to biolib when creating a new app.
@@ -37,19 +37,19 @@ In the Makefile, replace all instances of the C/C++ compiler (e.g. g++) with emc
 
 ### If your project uses configure to build it's Makefile:
 Add this code to your build.sh:
-'''
+```
 emmake make clean
 emconfigure ./configure
 emmake make
-'''
+```
 
 ### If your wasm file complains about missing functions when executed:
 This might be caused by library archives (.a files) that have not been linked. Search for .a files in your project:
-'''
+```
 find . -name "*.a"
-'''
+```
 Then link the archives you find by adjsuting your build.sh like so:
-'''
+```
 library_arr="\
     path/to/archive/file1.a \
     path/to/archive/file2.a"
@@ -62,6 +62,5 @@ for BINNAME in ${array[@]}; do
         $APP_ADDITIONAL_FLAGS \
         -o $BINNAME.mjs $BINNAME.bc $library_arr
 done
-
-'''
+```
 
