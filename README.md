@@ -18,7 +18,7 @@ The command takes in 3 volume mappings:
 
 ## The build.sh script
 
-The image ships with a default build script. For simple projects, this should be sufficient. Remember to change the binary file name "your_file_name" in line 3 of build.sh.
+The image ships with a default build script. For simple projects, this should be sufficient. Remember to change the binary file name "your_file_name" on line 3 of build.sh.
 Build.sh uses emscripten (https://emscripten.org/index.html) to compile C/C++ to wasm.
 
 ## Creating the Biolib App
@@ -64,5 +64,4 @@ for BINNAME in ${array[@]}; do
 done
 
 '''
-
 
