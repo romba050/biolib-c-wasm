@@ -30,7 +30,7 @@ When creating the Biolib app, make sure to select FileType -> WebAssembly and co
 ## Common issues
 
 ### If your project doesn't have a Makefile
-`build.sh` expects a Makefile in the directory to run. In case you do not have a `Makefile`, use the one provided in this repository. Again, replace "your_file_name" with the name of the script you want to compile.
+`build.sh` expects a Makefile in the directory to run. In case you do not have a `Makefile`, use the one provided in this repository (examples/Makefile). Again, replace "your_file_name" with the name of the script you want to compile.
 
 ### If your project does have a Makefile
 In the Makefile, replace all instances of the C/C++ compiler (e.g. g++) with emcc (on Linux/MacOS, works for both C and C++, use em++ to force compilation as C++).
