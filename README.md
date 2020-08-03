@@ -6,7 +6,7 @@ After copying  this repository, place `build.sh` in the folder of the project yo
 
 To install docker, see https://docs.docker.com/get-docker/.
 
-From that same folder, you can fetch and run the docker image directly from Docker Hub by running the following command:
+Start your docker program, then, from the project repository, you can fetch and run our docker image directly from Docker Hub by running the following command:
 ```
 docker run -v $PWD/build.sh:/build.sh -v $PWD:/input -v $PWD/output:/output biolib/c-wasm
 ```
