@@ -48,19 +48,17 @@ This might be caused by library archives (.a files) that have not been linked. S
 ```
 find . -name "*.a"
 ```
-Then link the archives you find by adjsuting your build.sh like so:
+Then link the archives you find by adjusting your build.sh like so:
 ```
 library_arr="\
     path/to/archive/file1.a \
     path/to/archive/file2.a"
 
-for BINNAME in ${array[@]}; do
-    mv emboss/.libs/$BINNAME $BINNAME.bc
+mv emboss/.libs/$BINNAME $BINNAME.bc
 
-    emcc \
-        $BIOLIB_REQ_FLAGS \
-        $APP_ADDITIONAL_FLAGS \
-        -o $BINNAME.mjs $BINNAME.bc $library_arr
-done
+emcc \
+    $BIOLIB_REQ_FLAGS \
+    $APP_ADDITIONAL_FLAGS \
+    -o $BINNAME.mjs $BINNAME.bc $library_arr
 ```
 
